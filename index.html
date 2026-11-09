@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyDashboard - Work Management</title>
+
 <style>
 :root {
   --green: #064e35;
@@ -17,19 +18,24 @@
   --red: #e84c4c;
   --yellow: #e6a52c;
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: var(--bg);
   color: var(--text);
 }
+
 button, input, select { font: inherit; }
 button { cursor: pointer; }
+
 .app {
   display: flex;
   min-height: 100vh;
 }
+
 .sidebar {
   width: 225px;
   background: #fff;
@@ -41,6 +47,7 @@ button { cursor: pointer; }
   display: flex;
   flex-direction: column;
 }
+
 .brand {
   display: flex;
   align-items: center;
@@ -49,6 +56,7 @@ button { cursor: pointer; }
   font-size: 18px;
   margin: 0 5px 38px;
 }
+
 .brand-icon {
   width: 34px;
   height: 34px;
@@ -58,6 +66,7 @@ button { cursor: pointer; }
   display: grid;
   place-items: center;
 }
+
 .menu-label {
   font-size: 10px;
   color: #a0aaa4;
@@ -65,6 +74,7 @@ button { cursor: pointer; }
   margin: 18px 8px 10px;
   font-weight: bold;
 }
+
 .nav-btn {
   display: flex;
   gap: 12px;
@@ -79,13 +89,23 @@ button { cursor: pointer; }
   font-size: 13px;
   margin-bottom: 5px;
 }
-.nav-btn:hover { background: #f1f7f3; color: var(--green); }
+
+.nav-btn:hover {
+  background: #f1f7f3;
+  color: var(--green);
+}
+
 .nav-btn.active {
   background: var(--green);
   color: white;
   font-weight: bold;
 }
-.nav-icon { width: 19px; text-align: center; }
+
+.nav-icon {
+  width: 19px;
+  text-align: center;
+}
+
 .sidebar-bottom {
   margin-top: auto;
   background: var(--green);
@@ -95,13 +115,16 @@ button { cursor: pointer; }
   font-size: 12px;
   line-height: 1.6;
 }
+
 .sidebar-bottom strong { font-size: 14px; }
+
 .main {
   margin-left: 225px;
   width: calc(100% - 225px);
   padding: 27px 30px 40px;
   max-width: 1700px;
 }
+
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -109,9 +132,24 @@ button { cursor: pointer; }
   margin-bottom: 25px;
   gap: 15px;
 }
-.page-title { font-size: 22px; font-weight: 800; }
-.page-subtitle { color: var(--muted); font-size: 12px; margin-top: 5px; }
-.top-actions { display: flex; align-items: center; gap: 10px; }
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.page-subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .date-chip {
   border: 1px solid var(--border);
   background: white;
@@ -120,6 +158,7 @@ button { cursor: pointer; }
   color: #65716a;
   font-size: 12px;
 }
+
 .avatar {
   width: 35px;
   height: 35px;
@@ -131,14 +170,17 @@ button { cursor: pointer; }
   font-weight: bold;
   font-size: 12px;
 }
+
 .page { display: none; }
 .page.active { display: block; }
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0,1fr));
   gap: 15px;
   margin-bottom: 18px;
 }
+
 .stat-card {
   background: white;
   padding: 19px;
@@ -146,6 +188,7 @@ button { cursor: pointer; }
   border: 1px solid var(--border);
   min-height: 120px;
 }
+
 .stat-top {
   display: flex;
   justify-content: space-between;
@@ -153,6 +196,7 @@ button { cursor: pointer; }
   color: var(--muted);
   font-size: 12px;
 }
+
 .stat-icon {
   width: 30px;
   height: 30px;
@@ -162,18 +206,260 @@ button { cursor: pointer; }
   place-items: center;
   color: var(--green);
 }
+
 .stat-number {
   font-size: 27px;
   font-weight: 800;
   margin-top: 13px;
 }
-.stat-note { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+.stat-note {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* KALENDER */
+
+.calendar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.calendar-panel,
+.calendar-detail {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.calendar-month {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.calendar-navigation {
+  display: flex;
+  gap: 6px;
+}
+
+.calendar-navigation button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: white;
+  color: var(--green);
+  font-size: 17px;
+}
+
+.calendar-navigation button:hover {
+  background: var(--light-green);
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.calendar-weekdays {
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays div {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: bold;
+  padding: 7px 0;
+}
+
+.calendar-day {
+  min-height: 90px;
+  border: 1px solid #edf0ed;
+  border-radius: 8px;
+  background: #fff;
+  padding: 7px 5px;
+  text-align: left;
+  min-width: 0;
+  overflow: hidden;
+  transition: .15s;
+}
+
+.calendar-day:hover {
+  border-color: var(--green2);
+  background: #f5faf7;
+}
+
+.calendar-day.selected {
+  border: 2px solid var(--green);
+  background: #edf7f1;
+}
+
+.calendar-day.other-month {
+  background: #f8f9f8;
+  opacity: .55;
+}
+
+.calendar-day.today .day-number {
+  background: var(--green);
+  color: white;
+}
+
+.day-number {
+  display: inline-grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.day-planning {
+  display: block;
+  background: #e6f5ed;
+  color: #08794c;
+  border-radius: 4px;
+  padding: 3px 4px;
+  margin-top: 3px;
+  font-size: 9px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.day-more {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.calendar-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-square {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.legend-planning { background: #b7e6cc; }
+.legend-selected { background: var(--green); }
+
+.calendar-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-detail-date {
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.calendar-detail-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+.calendar-event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendar-event {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green2);
+  border-radius: 8px;
+  padding: 11px;
+  background: #fcfdfc;
+}
+
+.calendar-event-name {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.calendar-event-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.calendar-event-status {
+  font-size: 9px;
+  font-weight: bold;
+  padding: 4px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.calendar-event-status.done {
+  background: #e2f6eb;
+  color: #07834f;
+}
+
+.calendar-event-status.pending {
+  background: #fff2d8;
+  color: #a66b0a;
+}
+
+.calendar-empty {
+  padding: 25px 10px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
 .progress-layout {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: 16px;
   margin-bottom: 18px;
 }
+
 .panel {
   background: white;
   border: 1px solid var(--border);
@@ -182,6 +468,7 @@ button { cursor: pointer; }
   margin-bottom: 18px;
   min-width: 0;
 }
+
 .panel-head {
   display: flex;
   justify-content: space-between;
@@ -189,9 +476,24 @@ button { cursor: pointer; }
   gap: 12px;
   margin-bottom: 17px;
 }
-.panel-title { font-size: 15px; font-weight: 800; }
-.panel-desc { color: var(--muted); font-size: 11px; margin-top: 5px; }
-.progress-number { font-size: 31px; font-weight: 800; color: var(--green); }
+
+.panel-title {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.panel-desc {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.progress-number {
+  font-size: 31px;
+  font-weight: 800;
+  color: var(--green);
+}
+
 .progress-track {
   height: 12px;
   border-radius: 20px;
@@ -199,6 +501,7 @@ button { cursor: pointer; }
   overflow: hidden;
   margin: 17px 0 12px;
 }
+
 .progress-fill {
   height: 100%;
   background: #09a766;
@@ -206,12 +509,14 @@ button { cursor: pointer; }
   width: 0%;
   transition: width .3s;
 }
+
 .progress-legend {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
   color: var(--muted);
 }
+
 .dot {
   display: inline-block;
   width: 8px;
@@ -219,15 +524,18 @@ button { cursor: pointer; }
   border-radius: 50%;
   margin-right: 5px;
 }
+
 .green-dot { background: #09a766; }
 .yellow-dot { background: #e6a52c; }
 .red-dot { background: #e84c4c; }
+
 .progress-circle-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 18px;
 }
+
 .circle {
   width: 112px;
   height: 112px;
@@ -237,6 +545,7 @@ button { cursor: pointer; }
   place-items: center;
   flex-shrink: 0;
 }
+
 .circle-inner {
   width: 83px;
   height: 83px;
@@ -247,9 +556,21 @@ button { cursor: pointer; }
   font-size: 19px;
   font-weight: 800;
 }
-.legend-list { font-size: 11px; line-height: 2.2; color: var(--muted); }
+
+.legend-list {
+  font-size: 11px;
+  line-height: 2.2;
+  color: var(--muted);
+}
+
 .table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
 th {
   background: #f7f9f7;
   color: #87918b;
@@ -258,12 +579,15 @@ th {
   padding: 12px;
   font-weight: 600;
 }
+
 td {
   padding: 13px 12px;
   border-bottom: 1px solid #edf0ed;
   font-size: 12px;
 }
+
 tr:last-child td { border-bottom: 0; }
+
 .status {
   border: 0;
   padding: 6px 10px;
@@ -272,16 +596,28 @@ tr:last-child td { border-bottom: 0; }
   font-weight: bold;
   white-space: nowrap;
 }
-.status.done { color: #07834f; background: #e2f6eb; }
-.status.pending { color: #a66b0a; background: #fff2d8; }
+
+.status.done {
+  color: #07834f;
+  background: #e2f6eb;
+}
+
+.status.pending {
+  color: #a66b0a;
+  background: #fff2d8;
+}
+
 .status-btn { cursor: pointer; }
+
 .table-action {
   border: 0;
   background: transparent;
   color: #9aa39d;
   font-size: 16px;
 }
+
 .table-action:hover { color: var(--red); }
+
 .primary-btn {
   background: var(--green);
   color: white;
@@ -291,7 +627,9 @@ tr:last-child td { border-bottom: 0; }
   font-size: 12px;
   font-weight: bold;
 }
+
 .primary-btn:hover { background: var(--green2); }
+
 .secondary-btn {
   background: white;
   border: 1px solid var(--border);
@@ -300,6 +638,7 @@ tr:last-child td { border-bottom: 0; }
   padding: 10px 14px;
   font-size: 12px;
 }
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -307,6 +646,7 @@ tr:last-child td { border-bottom: 0; }
   align-items: center;
   margin-bottom: 16px;
 }
+
 .field {
   border: 1px solid var(--border);
   background: white;
@@ -316,21 +656,26 @@ tr:last-child td { border-bottom: 0; }
   color: #39443d;
   min-width: 160px;
 }
+
 .form-panel { display: none; }
 .form-panel.open { display: block; }
+
 .form-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr auto;
   gap: 10px;
   align-items: end;
 }
+
 .form-field label {
   display: block;
   font-size: 11px;
   color: var(--muted);
   margin-bottom: 7px;
 }
-.form-field input, .form-field select {
+
+.form-field input,
+.form-field select {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -338,12 +683,14 @@ tr:last-child td { border-bottom: 0; }
   font-size: 12px;
   background: white;
 }
+
 .empty {
   padding: 30px;
   text-align: center;
   color: var(--muted);
   font-size: 12px;
 }
+
 .today-tag {
   background: var(--light-green);
   color: var(--green);
@@ -352,31 +699,88 @@ tr:last-child td { border-bottom: 0; }
   font-size: 10px;
   font-weight: bold;
 }
+
 .mobile-menu { display: none; }
+
 @media(max-width: 1000px) {
   .stats { grid-template-columns: repeat(2,1fr); }
   .progress-layout { grid-template-columns: 1fr; }
+  .calendar-layout { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr 1fr; }
 }
+
 @media(max-width: 700px) {
-  .sidebar { width: 65px; padding: 18px 8px; }
+  .sidebar {
+    width: 65px;
+    padding: 18px 8px;
+  }
+
   .brand { margin: 0 6px 35px; }
-  .brand-name, .nav-text, .menu-label, .sidebar-bottom { display: none; }
-  .nav-btn { justify-content: center; padding: 13px 5px; }
+
+  .brand-name,
+  .nav-text,
+  .menu-label,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .nav-btn {
+    justify-content: center;
+    padding: 13px 5px;
+  }
+
   .nav-icon { font-size: 17px; }
-  .main { margin-left: 65px; width: calc(100% - 65px); padding: 20px 13px; }
+
+  .main {
+    margin-left: 65px;
+    width: calc(100% - 65px);
+    padding: 20px 13px;
+  }
+
   .topbar { align-items: flex-start; }
   .page-title { font-size: 19px; }
   .top-actions .date-chip { display: none; }
   .stats { gap: 9px; }
-  .stat-card { padding: 13px; min-height: 105px; }
+
+  .stat-card {
+    padding: 13px;
+    min-height: 105px;
+  }
+
   .stat-number { font-size: 22px; }
   .panel { padding: 14px; }
   .form-grid { grid-template-columns: 1fr; }
   .progress-circle-wrap { flex-wrap: wrap; }
+
+  .calendar-panel,
+  .calendar-detail {
+    padding: 12px;
+  }
+
+  .calendar-day {
+    min-height: 66px;
+    padding: 4px 3px;
+  }
+
+  .calendar-weekdays { gap: 2px; }
+  .calendar-days { gap: 3px; }
+
+  .day-number {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .day-planning {
+    font-size: 8px;
+    padding: 2px;
+  }
+
+  .day-more { font-size: 8px; }
 }
 </style>
 </head>
+
 <body>
 <div class="app">
 
@@ -387,14 +791,20 @@ tr:last-child td { border-bottom: 0; }
     </div>
 
     <div class="menu-label">MENU UTAMA</div>
+
     <button class="nav-btn active" data-page="dashboard">
-      <span class="nav-icon">▦</span><span class="nav-text">Dashboard</span>
+      <span class="nav-icon">▦</span>
+      <span class="nav-text">Dashboard</span>
     </button>
+
     <button class="nav-btn" data-page="planning">
-      <span class="nav-icon">▣</span><span class="nav-text">Daily Planning</span>
+      <span class="nav-icon">▣</span>
+      <span class="nav-text">Daily Planning</span>
     </button>
+
     <button class="nav-btn" data-page="activity">
-      <span class="nav-icon">☷</span><span class="nav-text">Daftar Activity</span>
+      <span class="nav-icon">☷</span>
+      <span class="nav-text">Daftar Activity</span>
     </button>
 
     <div class="sidebar-bottom">
@@ -404,11 +814,15 @@ tr:last-child td { border-bottom: 0; }
   </aside>
 
   <main class="main">
+
     <header class="topbar">
       <div>
         <div class="page-title" id="headerTitle">Dashboard</div>
-        <div class="page-subtitle" id="headerSubtitle">Pantau progres pekerjaan harian Anda.</div>
+        <div class="page-subtitle" id="headerSubtitle">
+          Pantau progres pekerjaan harian Anda.
+        </div>
       </div>
+
       <div class="top-actions">
         <div class="date-chip" id="headerDate"></div>
         <div class="avatar">MY</div>
@@ -417,30 +831,108 @@ tr:last-child td { border-bottom: 0; }
 
     <!-- DASHBOARD -->
     <section class="page active" id="dashboard">
+
       <div class="stats">
         <div class="stat-card">
-          <div class="stat-top"><span>Total Planning</span><span class="stat-icon">▣</span></div>
+          <div class="stat-top">
+            <span>Total Planning</span>
+            <span class="stat-icon">▣</span>
+          </div>
           <div class="stat-number" id="statPlanning">0</div>
           <div class="stat-note">Rencana pekerjaan hari ini</div>
         </div>
+
         <div class="stat-card">
-          <div class="stat-top"><span>Total Activity</span><span class="stat-icon">☷</span></div>
+          <div class="stat-top">
+            <span>Total Activity</span>
+            <span class="stat-icon">☷</span>
+          </div>
           <div class="stat-number" id="statActivity">0</div>
           <div class="stat-note">Aktivitas hari ini</div>
         </div>
+
         <div class="stat-card">
-          <div class="stat-top"><span>Selesai</span><span class="stat-icon">✓</span></div>
+          <div class="stat-top">
+            <span>Selesai</span>
+            <span class="stat-icon">✓</span>
+          </div>
           <div class="stat-number" id="statDone">0</div>
           <div class="stat-note">Planning dan activity selesai</div>
         </div>
+
         <div class="stat-card">
-          <div class="stat-top"><span>Belum Selesai</span><span class="stat-icon">◷</span></div>
+          <div class="stat-top">
+            <span>Belum Selesai</span>
+            <span class="stat-icon">◷</span>
+          </div>
           <div class="stat-number" id="statPending">0</div>
           <div class="stat-note">Pekerjaan yang perlu ditindaklanjuti</div>
         </div>
       </div>
 
+      <!-- KALENDER PLANNING -->
+      <div class="calendar-layout">
+
+        <div class="calendar-panel">
+          <div class="calendar-header">
+            <div>
+              <div class="panel-title">Calendar Planning</div>
+              <div class="panel-desc">Jadwal rencana pekerjaan setiap bulan</div>
+            </div>
+
+            <div class="calendar-navigation">
+              <button onclick="changeCalendarMonth(-1)" title="Bulan sebelumnya">‹</button>
+              <button onclick="goToCurrentMonth()" title="Bulan sekarang">●</button>
+              <button onclick="changeCalendarMonth(1)" title="Bulan berikutnya">›</button>
+            </div>
+          </div>
+
+          <div class="calendar-month" id="calendarMonth"></div>
+
+          <div class="calendar-weekdays">
+            <div>Sen</div>
+            <div>Sel</div>
+            <div>Rab</div>
+            <div>Kam</div>
+            <div>Jum</div>
+            <div>Sab</div>
+            <div>Min</div>
+          </div>
+
+          <div class="calendar-days" id="calendarDays"></div>
+
+          <div class="calendar-legend">
+            <span>
+              <i class="legend-square legend-planning"></i>
+              Ada planning
+            </span>
+            <span>
+              <i class="legend-square legend-selected"></i>
+              Tanggal dipilih
+            </span>
+          </div>
+        </div>
+
+        <!-- DETAIL PLANNING SESUAI TANGGAL -->
+        <div class="calendar-detail">
+          <div class="panel-title">Detail Planning</div>
+          <div class="panel-desc">Daftar pekerjaan sesuai tanggal yang dipilih.</div>
+
+          <div style="height:15px"></div>
+
+          <div class="calendar-detail-date" id="calendarSelectedDate"></div>
+          <div class="calendar-detail-subtitle" id="calendarSelectedCount">
+            0 planning
+          </div>
+
+          <div class="calendar-event-list" id="calendarSelectedEvents"></div>
+        </div>
+
+      </div>
+
+      <!-- PROGRESS PEKERJAAN -->
       <div class="progress-layout">
+
         <div class="panel">
           <div class="panel-head">
             <div>
@@ -449,13 +941,22 @@ tr:last-child td { border-bottom: 0; }
             </div>
             <span class="today-tag">HARI INI</span>
           </div>
+
           <div class="progress-number" id="progressText">0%</div>
+
           <div class="progress-track">
             <div class="progress-fill" id="progressBar"></div>
           </div>
+
           <div class="progress-legend">
-            <span><i class="dot green-dot"></i><span id="doneLabel">0 selesai</span></span>
-            <span><i class="dot yellow-dot"></i><span id="pendingLabel">0 belum selesai</span></span>
+            <span>
+              <i class="dot green-dot"></i>
+              <span id="doneLabel">0 selesai</span>
+            </span>
+            <span>
+              <i class="dot yellow-dot"></i>
+              <span id="pendingLabel">0 belum selesai</span>
+            </span>
           </div>
         </div>
 
@@ -466,10 +967,12 @@ tr:last-child td { border-bottom: 0; }
               <div class="panel-desc">Komposisi pekerjaan hari ini</div>
             </div>
           </div>
+
           <div class="progress-circle-wrap">
             <div class="circle" id="progressCircle">
               <div class="circle-inner" id="circleText">0%</div>
             </div>
+
             <div class="legend-list">
               <div><i class="dot green-dot"></i>Selesai</div>
               <div><i class="dot yellow-dot"></i>Belum selesai</div>
@@ -477,66 +980,97 @@ tr:last-child td { border-bottom: 0; }
             </div>
           </div>
         </div>
+
       </div>
 
+      <!-- DAILY PLANNING HARI INI -->
       <div class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-title">Daily Planning</div>
             <div class="panel-desc">Daftar rencana pekerjaan pada hari ini</div>
           </div>
-          <button class="secondary-btn" onclick="showPage('planning')">Lihat Semua →</button>
+
+          <button class="secondary-btn" onclick="showPage('planning')">
+            Lihat Semua →
+          </button>
         </div>
+
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>No.</th><th>Rencana Pekerjaan</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr>
+              <tr>
+                <th>No.</th>
+                <th>Rencana Pekerjaan</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
             </thead>
             <tbody id="dashboardPlanning"></tbody>
           </table>
         </div>
       </div>
 
+      <!-- ACTIVITY HARI INI -->
       <div class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-title">Daftar Activity</div>
             <div class="panel-desc">Aktivitas aktual yang dilakukan hari ini</div>
           </div>
-          <button class="secondary-btn" onclick="showPage('activity')">Lihat Semua →</button>
+
+          <button class="secondary-btn" onclick="showPage('activity')">
+            Lihat Semua →
+          </button>
         </div>
+
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>No.</th><th>Nama Aktivitas</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr>
+              <tr>
+                <th>No.</th>
+                <th>Nama Aktivitas</th>
+                <th>Waktu</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
             </thead>
             <tbody id="dashboardActivity"></tbody>
           </table>
         </div>
       </div>
+
     </section>
 
     <!-- DAILY PLANNING -->
     <section class="page" id="planning">
+
       <div class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-title">Daily Planning</div>
             <div class="panel-desc">Buat dan kelola rencana pekerjaan berdasarkan tanggal.</div>
           </div>
-          <button class="primary-btn" onclick="toggleForm('planningForm')">+ Tambah Planning</button>
+
+          <button class="primary-btn" onclick="toggleForm('planningForm')">
+            + Tambah Planning
+          </button>
         </div>
 
         <div class="form-panel" id="planningForm">
           <div class="form-grid">
+
             <div class="form-field">
               <label>Nama Rencana Pekerjaan</label>
               <input id="planningName" placeholder="Contoh: Pemeriksaan gearbox">
             </div>
+
             <div class="form-field">
               <label>Tanggal Pelaksanaan</label>
               <input type="date" id="planningDate">
             </div>
+
             <div class="form-field">
               <label>Kategori</label>
               <select id="planningCategory">
@@ -547,7 +1081,9 @@ tr:last-child td { border-bottom: 0; }
                 <option>Other</option>
               </select>
             </div>
+
             <button class="primary-btn" onclick="addPlanning()">Simpan</button>
+
           </div>
         </div>
       </div>
@@ -564,45 +1100,64 @@ tr:last-child td { border-bottom: 0; }
             <div class="panel-title">Daftar Planning</div>
             <div class="panel-desc">Klik status untuk mengubah progres pekerjaan.</div>
           </div>
+
           <span class="today-tag" id="planningCount">0 DATA</span>
         </div>
+
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>No.</th><th>Rencana Pekerjaan</th><th>Kategori</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr>
+              <tr>
+                <th>No.</th>
+                <th>Rencana Pekerjaan</th>
+                <th>Kategori</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
             </thead>
             <tbody id="planningTable"></tbody>
           </table>
         </div>
       </div>
+
     </section>
 
     <!-- ACTIVITY -->
     <section class="page" id="activity">
+
       <div class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-title">Daftar Activity</div>
             <div class="panel-desc">Catat aktivitas pekerjaan yang benar-benar dilakukan.</div>
           </div>
-          <button class="primary-btn" onclick="toggleForm('activityForm')">+ Tambah Activity</button>
+
+          <button class="primary-btn" onclick="toggleForm('activityForm')">
+            + Tambah Activity
+          </button>
         </div>
 
         <div class="form-panel" id="activityForm">
           <div class="form-grid">
+
             <div class="form-field">
               <label>Nama Aktivitas</label>
               <input id="activityName" placeholder="Contoh: Inspeksi equipment">
             </div>
+
             <div class="form-field">
               <label>Tanggal</label>
               <input type="date" id="activityDate">
             </div>
+
             <div class="form-field">
               <label>Waktu</label>
               <input type="time" id="activityTime">
             </div>
+
             <button class="primary-btn" onclick="addActivity()">Simpan</button>
+
           </div>
         </div>
       </div>
@@ -619,17 +1174,27 @@ tr:last-child td { border-bottom: 0; }
             <div class="panel-title">Riwayat Aktivitas</div>
             <div class="panel-desc">Status aktivitas dapat diperbarui kapan saja.</div>
           </div>
+
           <span class="today-tag" id="activityCount">0 DATA</span>
         </div>
+
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>No.</th><th>Nama Aktivitas</th><th>Tanggal</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr>
+              <tr>
+                <th>No.</th>
+                <th>Nama Aktivitas</th>
+                <th>Tanggal</th>
+                <th>Waktu</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
             </thead>
             <tbody id="activityTable"></tbody>
           </table>
         </div>
       </div>
+
     </section>
 
   </main>
@@ -648,6 +1213,10 @@ const today = () => {
 let planning = JSON.parse(localStorage.getItem(STORAGE_PLANNING) || "[]");
 let activities = JSON.parse(localStorage.getItem(STORAGE_ACTIVITY) || "[]");
 
+/* STATE KALENDER */
+let calendarViewDate = new Date();
+let calendarSelectedDate = today();
+
 function saveData() {
   localStorage.setItem(STORAGE_PLANNING, JSON.stringify(planning));
   localStorage.setItem(STORAGE_ACTIVITY, JSON.stringify(activities));
@@ -655,13 +1224,182 @@ function saveData() {
 
 function formatDate(date) {
   if (!date) return "-";
+
   return new Date(date + "T00:00:00").toLocaleDateString("id-ID", {
-    day:"2-digit", month:"short", year:"numeric"
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
   });
 }
 
+/* FORMAT TANGGAL UNTUK KALENDER */
+function dateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+/* PINDAH BULAN */
+function changeCalendarMonth(step) {
+  calendarViewDate = new Date(
+    calendarViewDate.getFullYear(),
+    calendarViewDate.getMonth() + step,
+    1
+  );
+
+  calendarSelectedDate = dateKey(calendarViewDate);
+  renderCalendar();
+}
+
+/* KEMBALI KE BULAN SEKARANG */
+function goToCurrentMonth() {
+  calendarViewDate = new Date();
+
+  calendarSelectedDate = today();
+  renderCalendar();
+}
+
+/* PILIH TANGGAL */
+function selectCalendarDate(date) {
+  calendarSelectedDate = date;
+
+  const selected = new Date(date + "T00:00:00");
+
+  calendarViewDate = new Date(
+    selected.getFullYear(),
+    selected.getMonth(),
+    1
+  );
+
+  renderCalendar();
+}
+
+/* TAMPILKAN KALENDER */
+function renderCalendar() {
+  const year = calendarViewDate.getFullYear();
+  const month = calendarViewDate.getMonth();
+
+  const monthName = calendarViewDate.toLocaleDateString("id-ID", {
+    month: "long",
+    year: "numeric"
+  });
+
+  document.getElementById("calendarMonth").textContent =
+    monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+  const firstDay = new Date(year, month, 1);
+
+  // Kalender dimulai dari hari Senin
+  let startOffset = firstDay.getDay() - 1;
+  if (startOffset < 0) startOffset = 6;
+
+  const calendarStart = new Date(year, month, 1 - startOffset);
+
+  let html = "";
+
+  // Tampilkan 6 baris kalender
+  for (let i = 0; i < 42; i++) {
+    const currentDate = new Date(calendarStart);
+    currentDate.setDate(calendarStart.getDate() + i);
+
+    const key = dateKey(currentDate);
+    const isCurrentMonth = currentDate.getMonth() === month;
+    const isToday = key === today();
+    const isSelected = key === calendarSelectedDate;
+
+    const dayPlanning = planning.filter(x => x.date === key);
+
+    let classes = "calendar-day";
+
+    if (!isCurrentMonth) classes += " other-month";
+    if (isToday) classes += " today";
+    if (isSelected) classes += " selected";
+
+    html += `
+      <button
+        type="button"
+        class="${classes}"
+        onclick="selectCalendarDate('${key}')"
+        title="${dayPlanning.length} planning"
+      >
+        <span class="day-number">${currentDate.getDate()}</span>
+
+        ${dayPlanning.slice(0, 2).map(item => `
+          <span class="day-planning" title="${escapeHTML(item.name)}">
+            ${escapeHTML(item.name)}
+          </span>
+        `).join("")}
+
+        ${dayPlanning.length > 2 ? `
+          <span class="day-more">+${dayPlanning.length - 2} lainnya</span>
+        ` : ""}
+      </button>
+    `;
+  }
+
+  document.getElementById("calendarDays").innerHTML = html;
+
+  renderCalendarDetails();
+}
+
+/* DETAIL PLANNING BERDASARKAN TANGGAL YANG DIPILIH */
+function renderCalendarDetails() {
+  const selectedDate = calendarSelectedDate;
+
+  const selectedPlanning = planning
+    .filter(x => x.date === selectedDate)
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const formatted = new Date(selectedDate + "T00:00:00")
+    .toLocaleDateString("id-ID", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+
+  document.getElementById("calendarSelectedDate").textContent =
+    formatted.charAt(0).toUpperCase() + formatted.slice(1);
+
+  document.getElementById("calendarSelectedCount").textContent =
+    selectedPlanning.length + " planning terjadwal";
+
+  const container = document.getElementById("calendarSelectedEvents");
+
+  if (!selectedPlanning.length) {
+    container.innerHTML = `
+      <div class="calendar-empty">
+        Belum ada planning pada tanggal ini.<br>
+        Tambahkan planning melalui menu Daily Planning.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = selectedPlanning.map(item => `
+    <div class="calendar-event">
+      <div class="calendar-event-name">
+        ${escapeHTML(item.name)}
+      </div>
+
+      <div class="calendar-event-meta">
+        <span>${escapeHTML(item.category || "Other")}</span>
+
+        <span class="calendar-event-status ${item.done ? "done" : "pending"}">
+          ${item.done ? "✓ Selesai" : "◷ Belum Selesai"}
+        </span>
+      </div>
+    </div>
+  `).join("");
+}
+
 function showPage(page) {
-  document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(".page").forEach(el => {
+    el.classList.remove("active");
+  });
+
   document.getElementById(page).classList.add("active");
 
   document.querySelectorAll(".nav-btn").forEach(btn => {
@@ -690,6 +1428,7 @@ function toggleForm(id) {
   document.getElementById(id).classList.toggle("open");
 }
 
+/* TAMBAH PLANNING */
 function addPlanning() {
   const name = document.getElementById("planningName").value.trim();
   const date = document.getElementById("planningDate").value;
@@ -702,17 +1441,26 @@ function addPlanning() {
 
   planning.push({
     id: Date.now().toString(),
-    name, date, category,
+    name,
+    date,
+    category,
     done: false,
     createdAt: new Date().toISOString()
   });
 
+  // Setelah planning disimpan, kalender otomatis menuju tanggal tersebut
+  calendarSelectedDate = date;
+  calendarViewDate = new Date(date + "T00:00:00");
+
   saveData();
+
   document.getElementById("planningName").value = "";
   document.getElementById("planningForm").classList.remove("open");
+
   renderAll();
 }
 
+/* TAMBAH ACTIVITY */
 function addActivity() {
   const name = document.getElementById("activityName").value.trim();
   const date = document.getElementById("activityDate").value;
@@ -725,50 +1473,75 @@ function addActivity() {
 
   activities.push({
     id: Date.now().toString(),
-    name, date, time,
+    name,
+    date,
+    time,
     done: false,
     createdAt: new Date().toISOString()
   });
 
   saveData();
+
   document.getElementById("activityName").value = "";
   document.getElementById("activityForm").classList.remove("open");
+
   renderAll();
 }
 
+/* TOMBOL STATUS */
 function statusButton(type, id, done) {
-  return `<button class="status status-btn ${done ? "done" : "pending"}"
-    onclick="toggleStatus('${type}','${id}')">
-    ${done ? "✓ Selesai" : "◷ Belum Selesai"}
-  </button>`;
+  return `
+    <button
+      class="status status-btn ${done ? "done" : "pending"}"
+      onclick="toggleStatus('${type}','${id}')"
+    >
+      ${done ? "✓ Selesai" : "◷ Belum Selesai"}
+    </button>
+  `;
 }
 
+/* UBAH STATUS PEKERJAAN */
 function toggleStatus(type, id) {
   const list = type === "planning" ? planning : activities;
   const item = list.find(x => x.id === id);
+
   if (!item) return;
+
   item.done = !item.done;
+
   saveData();
   renderAll();
 }
 
+/* HAPUS DATA */
 function deleteItem(type, id) {
   if (!confirm("Yakin ingin menghapus data ini?")) return;
-  if (type === "planning") planning = planning.filter(x => x.id !== id);
-  else activities = activities.filter(x => x.id !== id);
+
+  if (type === "planning") {
+    planning = planning.filter(x => x.id !== id);
+  } else {
+    activities = activities.filter(x => x.id !== id);
+  }
+
   saveData();
   renderAll();
 }
 
+/* DASHBOARD */
 function renderDashboard() {
   const t = today();
+
   const p = planning.filter(x => x.date === t);
   const a = activities.filter(x => x.date === t);
 
   const all = [...p, ...a];
+
   const done = all.filter(x => x.done).length;
   const pending = all.length - done;
-  const percent = all.length ? Math.round(done / all.length * 100) : 0;
+
+  const percent = all.length
+    ? Math.round(done / all.length * 100)
+    : 0;
 
   document.getElementById("statPlanning").textContent = p.length;
   document.getElementById("statActivity").textContent = a.length;
@@ -777,10 +1550,17 @@ function renderDashboard() {
 
   document.getElementById("progressText").textContent = percent + "%";
   document.getElementById("progressBar").style.width = percent + "%";
-  document.getElementById("doneLabel").textContent = done + " selesai";
-  document.getElementById("pendingLabel").textContent = pending + " belum selesai";
+
+  document.getElementById("doneLabel").textContent =
+    done + " selesai";
+
+  document.getElementById("pendingLabel").textContent =
+    pending + " belum selesai";
+
   document.getElementById("circleText").textContent = percent + "%";
-  document.getElementById("totalLabel").textContent = "Total: " + all.length + " pekerjaan";
+
+  document.getElementById("totalLabel").textContent =
+    "Total: " + all.length + " pekerjaan";
 
   document.getElementById("progressCircle").style.background =
     `conic-gradient(#09a766 ${percent * 3.6}deg, #edf1ee 0deg)`;
@@ -788,86 +1568,138 @@ function renderDashboard() {
   const pBody = document.getElementById("dashboardPlanning");
   const aBody = document.getElementById("dashboardActivity");
 
-  pBody.innerHTML = p.length ? p.map((x,i) => `
-    <tr>
-      <td>${i+1}</td>
-      <td><strong>${escapeHTML(x.name)}</strong></td>
-      <td>${formatDate(x.date)}</td>
-      <td>${statusButton("planning",x.id,x.done)}</td>
-      <td><button class="table-action" onclick="deleteItem('planning','${x.id}')">×</button></td>
-    </tr>`).join("") : emptyRow(5, "Belum ada planning untuk hari ini.");
+  pBody.innerHTML = p.length
+    ? p.map((x, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${escapeHTML(x.name)}</strong></td>
+        <td>${formatDate(x.date)}</td>
+        <td>${statusButton("planning", x.id, x.done)}</td>
+        <td>
+          <button class="table-action"
+            onclick="deleteItem('planning','${x.id}')">×</button>
+        </td>
+      </tr>
+    `).join("")
+    : emptyRow(5, "Belum ada planning untuk hari ini.");
 
-  aBody.innerHTML = a.length ? a.slice().sort((x,y) => x.time.localeCompare(y.time)).map((x,i) => `
-    <tr>
-      <td>${i+1}</td>
-      <td><strong>${escapeHTML(x.name)}</strong></td>
-      <td>${x.time}</td>
-      <td>${statusButton("activity",x.id,x.done)}</td>
-      <td><button class="table-action" onclick="deleteItem('activity','${x.id}')">×</button></td>
-    </tr>`).join("") : emptyRow(5, "Belum ada aktivitas untuk hari ini.");
+  aBody.innerHTML = a.length
+    ? a.slice().sort((x, y) => x.time.localeCompare(y.time)).map((x, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${escapeHTML(x.name)}</strong></td>
+        <td>${x.time}</td>
+        <td>${statusButton("activity", x.id, x.done)}</td>
+        <td>
+          <button class="table-action"
+            onclick="deleteItem('activity','${x.id}')">×</button>
+        </td>
+      </tr>
+    `).join("")
+    : emptyRow(5, "Belum ada aktivitas untuk hari ini.");
+
+  // Perbarui kalender dan detail planning
+  renderCalendar();
 }
 
+/* TABEL DAILY PLANNING */
 function renderPlanning() {
   const filter = document.getElementById("planningFilter").value;
+
   const data = planning
     .filter(x => !filter || x.date === filter)
-    .sort((a,b) => b.date.localeCompare(a.date));
+    .sort((a, b) => b.date.localeCompare(a.date));
 
-  document.getElementById("planningCount").textContent = data.length + " DATA";
-  document.getElementById("planningTable").innerHTML = data.length ? data.map((x,i) => `
-    <tr>
-      <td>${i+1}</td>
-      <td><strong>${escapeHTML(x.name)}</strong></td>
-      <td>${escapeHTML(x.category || "-")}</td>
-      <td>${formatDate(x.date)}</td>
-      <td>${statusButton("planning",x.id,x.done)}</td>
-      <td><button class="table-action" onclick="deleteItem('planning','${x.id}')">×</button></td>
-    </tr>`).join("") : emptyRow(6, "Belum ada data planning.");
+  document.getElementById("planningCount").textContent =
+    data.length + " DATA";
+
+  document.getElementById("planningTable").innerHTML = data.length
+    ? data.map((x, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${escapeHTML(x.name)}</strong></td>
+        <td>${escapeHTML(x.category || "-")}</td>
+        <td>${formatDate(x.date)}</td>
+        <td>${statusButton("planning", x.id, x.done)}</td>
+        <td>
+          <button class="table-action"
+            onclick="deleteItem('planning','${x.id}')">×</button>
+        </td>
+      </tr>
+    `).join("")
+    : emptyRow(6, "Belum ada data planning.");
 }
 
+/* TABEL ACTIVITY */
 function renderActivity() {
   const filter = document.getElementById("activityFilter").value;
+
   const data = activities
     .filter(x => !filter || x.date === filter)
-    .sort((a,b) => b.date.localeCompare(a.date) || a.time.localeCompare(b.time));
+    .sort((a, b) =>
+      b.date.localeCompare(a.date) || a.time.localeCompare(b.time)
+    );
 
-  document.getElementById("activityCount").textContent = data.length + " DATA";
-  document.getElementById("activityTable").innerHTML = data.length ? data.map((x,i) => `
-    <tr>
-      <td>${i+1}</td>
-      <td><strong>${escapeHTML(x.name)}</strong></td>
-      <td>${formatDate(x.date)}</td>
-      <td>${x.time}</td>
-      <td>${statusButton("activity",x.id,x.done)}</td>
-      <td><button class="table-action" onclick="deleteItem('activity','${x.id}')">×</button></td>
-    </tr>`).join("") : emptyRow(6, "Belum ada data aktivitas.");
+  document.getElementById("activityCount").textContent =
+    data.length + " DATA";
+
+  document.getElementById("activityTable").innerHTML = data.length
+    ? data.map((x, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td><strong>${escapeHTML(x.name)}</strong></td>
+        <td>${formatDate(x.date)}</td>
+        <td>${x.time}</td>
+        <td>${statusButton("activity", x.id, x.done)}</td>
+        <td>
+          <button class="table-action"
+            onclick="deleteItem('activity','${x.id}')">×</button>
+        </td>
+      </tr>
+    `).join("")
+    : emptyRow(6, "Belum ada data aktivitas.");
 }
 
+/* TAMPILAN DATA KOSONG */
 function emptyRow(cols, message) {
-  return `<tr><td colspan="${cols}" class="empty">${message}</td></tr>`;
+  return `
+    <tr>
+      <td colspan="${cols}" class="empty">${message}</td>
+    </tr>
+  `;
 }
 
+/* PENGAMAN TEKS HTML */
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
   })[char]);
 }
 
+/* FILTER PLANNING */
 function clearPlanningFilter() {
   document.getElementById("planningFilter").value = "";
   renderPlanning();
 }
+
+/* FILTER ACTIVITY */
 function clearActivityFilter() {
   document.getElementById("activityFilter").value = "";
   renderActivity();
 }
 
+/* REFRESH SEMUA TAMPILAN */
 function renderAll() {
   renderDashboard();
   renderPlanning();
   renderActivity();
 }
 
+/* EXPORT EXCEL */
 function exportExcel() {
   if (typeof XLSX === "undefined") {
     alert("Library Excel belum berhasil dimuat. Periksa koneksi internet lalu refresh halaman.");
@@ -889,25 +1721,46 @@ function exportExcel() {
   }));
 
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(planningData), "Daily Planning");
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(activityData), "Daftar Activity");
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    XLSX.utils.json_to_sheet(planningData),
+    "Daily Planning"
+  );
+
+  XLSX.utils.book_append_sheet(
+    wb,
+    XLSX.utils.json_to_sheet(activityData),
+    "Daftar Activity"
+  );
+
   XLSX.writeFile(wb, "MyDashboard_Report.xlsx");
 }
 
+/* TANGGAL HEADER */
 document.getElementById("headerDate").textContent =
   new Date().toLocaleDateString("id-ID", {
-    weekday:"long", day:"numeric", month:"long", year:"numeric"
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
   });
 
+/* DEFAULT VALUE FORM */
 document.getElementById("planningDate").value = today();
 document.getElementById("activityDate").value = today();
 document.getElementById("planningFilter").value = today();
 document.getElementById("activityFilter").value = today();
-document.getElementById("activityTime").value =
-  new Date().toTimeString().slice(0,5);
 
+document.getElementById("activityTime").value =
+  new Date().toTimeString().slice(0, 5);
+
+/* TAMPILKAN DATA AWAL */
 renderAll();
+
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
 </body>
 </html>
