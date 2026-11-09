@@ -1,371 +1,913 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Dashboard</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #0b1120;
-      color: #f1f5f9;
-      min-height: 100vh;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 7%;
-      border-bottom: 1px solid #263248;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #60a5fa;
-    }
-
-    .clock {
-      color: #94a3b8;
-      font-size: 14px;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 24px;
-    }
-
-    .welcome {
-      margin-bottom: 30px;
-    }
-
-    .welcome h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .welcome p {
-      color: #94a3b8;
-      line-height: 1.6;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 30px;
-    }
-
-    .card {
-      background: #151f32;
-      border: 1px solid #263248;
-      border-radius: 16px;
-      padding: 24px;
-    }
-
-    .card p {
-      color: #94a3b8;
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .card h2 {
-      font-size: 30px;
-      color: #60a5fa;
-    }
-
-    .task-section {
-      background: #151f32;
-      border: 1px solid #263248;
-      border-radius: 16px;
-      padding: 24px;
-    }
-
-    .task-section h2 {
-      margin-bottom: 20px;
-    }
-
-    .task-form {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    input {
-      flex: 1;
-      min-width: 0;
-      padding: 13px;
-      background: #0b1120;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      color: white;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #60a5fa;
-    }
-
-    button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 8px;
-      background: #3b82f6;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #2563eb;
-    }
-
-    ul {
-      list-style: none;
-    }
-
-    li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 0;
-      border-bottom: 1px solid #263248;
-    }
-
-    li span {
-      flex: 1;
-      overflow-wrap: anywhere;
-    }
-
-    li.done span {
-      text-decoration: line-through;
-      color: #64748b;
-    }
-
-    .check {
-      accent-color: #3b82f6;
-      width: 17px;
-      height: 17px;
-      cursor: pointer;
-    }
-
-    .delete {
-      background: #dc2626;
-      padding: 8px 12px;
-    }
-
-    .delete:hover {
-      background: #b91c1c;
-    }
-
-    .empty {
-      color: #64748b;
-      padding: 10px 0;
-    }
-
-    footer {
-      text-align: center;
-      color: #64748b;
-      padding: 30px 15px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 650px) {
-      header {
-        padding: 20px;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-
-      main {
-        padding: 30px 16px;
-      }
-
-      .welcome h1 {
-        font-size: 26px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .task-form {
-        flex-direction: column;
-      }
-
-      .task-form button {
-        width: 100%;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyDashboard - Work Management</title>
+<style>
+:root {
+  --green: #064e35;
+  --green2: #08794c;
+  --light-green: #e6f5ed;
+  --bg: #f3f5f4;
+  --white: #ffffff;
+  --text: #202923;
+  --muted: #87918b;
+  --border: #e9eeea;
+  --red: #e84c4c;
+  --yellow: #e6a52c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar {
+  width: 225px;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  padding: 25px 15px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 18px;
+  margin: 0 5px 38px;
+}
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--green);
+  color: white;
+  display: grid;
+  place-items: center;
+}
+.menu-label {
+  font-size: 10px;
+  color: #a0aaa4;
+  letter-spacing: 1px;
+  margin: 18px 8px 10px;
+  font-weight: bold;
+}
+.nav-btn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  width: 100%;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #65716a;
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+.nav-btn:hover { background: #f1f7f3; color: var(--green); }
+.nav-btn.active {
+  background: var(--green);
+  color: white;
+  font-weight: bold;
+}
+.nav-icon { width: 19px; text-align: center; }
+.sidebar-bottom {
+  margin-top: auto;
+  background: var(--green);
+  color: white;
+  border-radius: 12px;
+  padding: 17px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.sidebar-bottom strong { font-size: 14px; }
+.main {
+  margin-left: 225px;
+  width: calc(100% - 225px);
+  padding: 27px 30px 40px;
+  max-width: 1700px;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+.page-title { font-size: 22px; font-weight: 800; }
+.page-subtitle { color: var(--muted); font-size: 12px; margin-top: 5px; }
+.top-actions { display: flex; align-items: center; gap: 10px; }
+.date-chip {
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 9px;
+  padding: 10px 12px;
+  color: #65716a;
+  font-size: 12px;
+}
+.avatar {
+  width: 35px;
+  height: 35px;
+  background: #dceee4;
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 12px;
+}
+.page { display: none; }
+.page.active { display: block; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 15px;
+  margin-bottom: 18px;
+}
+.stat-card {
+  background: white;
+  padding: 19px;
+  border-radius: 13px;
+  border: 1px solid var(--border);
+  min-height: 120px;
+}
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+.stat-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--light-green);
+  display: grid;
+  place-items: center;
+  color: var(--green);
+}
+.stat-number {
+  font-size: 27px;
+  font-weight: 800;
+  margin-top: 13px;
+}
+.stat-note { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.progress-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px;
+  margin-bottom: 18px;
+  min-width: 0;
+}
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 17px;
+}
+.panel-title { font-size: 15px; font-weight: 800; }
+.panel-desc { color: var(--muted); font-size: 11px; margin-top: 5px; }
+.progress-number { font-size: 31px; font-weight: 800; color: var(--green); }
+.progress-track {
+  height: 12px;
+  border-radius: 20px;
+  background: #edf1ee;
+  overflow: hidden;
+  margin: 17px 0 12px;
+}
+.progress-fill {
+  height: 100%;
+  background: #09a766;
+  border-radius: 20px;
+  width: 0%;
+  transition: width .3s;
+}
+.progress-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.green-dot { background: #09a766; }
+.yellow-dot { background: #e6a52c; }
+.red-dot { background: #e84c4c; }
+.progress-circle-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.circle {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: conic-gradient(#09a766 0deg, #edf1ee 0deg);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.circle-inner {
+  width: 83px;
+  height: 83px;
+  border-radius: 50%;
+  background: white;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  font-weight: 800;
+}
+.legend-list { font-size: 11px; line-height: 2.2; color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; }
+th {
+  background: #f7f9f7;
+  color: #87918b;
+  font-size: 11px;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+}
+td {
+  padding: 13px 12px;
+  border-bottom: 1px solid #edf0ed;
+  font-size: 12px;
+}
+tr:last-child td { border-bottom: 0; }
+.status {
+  border: 0;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.status.done { color: #07834f; background: #e2f6eb; }
+.status.pending { color: #a66b0a; background: #fff2d8; }
+.status-btn { cursor: pointer; }
+.table-action {
+  border: 0;
+  background: transparent;
+  color: #9aa39d;
+  font-size: 16px;
+}
+.table-action:hover { color: var(--red); }
+.primary-btn {
+  background: var(--green);
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.primary-btn:hover { background: var(--green2); }
+.secondary-btn {
+  background: white;
+  border: 1px solid var(--border);
+  color: #536158;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.field {
+  border: 1px solid var(--border);
+  background: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #39443d;
+  min-width: 160px;
+}
+.form-panel { display: none; }
+.form-panel.open { display: block; }
+.form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+.form-field label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+.form-field input, .form-field select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px;
+  font-size: 12px;
+  background: white;
+}
+.empty {
+  padding: 30px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+.today-tag {
+  background: var(--light-green);
+  color: var(--green);
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+.mobile-menu { display: none; }
+@media(max-width: 1000px) {
+  .stats { grid-template-columns: repeat(2,1fr); }
+  .progress-layout { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 700px) {
+  .sidebar { width: 65px; padding: 18px 8px; }
+  .brand { margin: 0 6px 35px; }
+  .brand-name, .nav-text, .menu-label, .sidebar-bottom { display: none; }
+  .nav-btn { justify-content: center; padding: 13px 5px; }
+  .nav-icon { font-size: 17px; }
+  .main { margin-left: 65px; width: calc(100% - 65px); padding: 20px 13px; }
+  .topbar { align-items: flex-start; }
+  .page-title { font-size: 19px; }
+  .top-actions .date-chip { display: none; }
+  .stats { gap: 9px; }
+  .stat-card { padding: 13px; min-height: 105px; }
+  .stat-number { font-size: 22px; }
+  .panel { padding: 14px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .progress-circle-wrap { flex-wrap: wrap; }
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="logo">MyDashboard.</div>
-    <div class="clock" id="clock">Memuat waktu...</div>
-  </header>
+<div class="app">
 
-  <main>
-    <section class="welcome">
-      <h1>Halo, Elyza Sayanggggg! 👋</h1>
-      <p>
-        Kelola aktivitas harianmu dengan lebih mudah.<br>
-        Tetapkan target, selesaikan tugas, dan terus berkembang.
-      </p>
-    </section>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">M</div>
+      <span class="brand-name">MyDashboard</span>
+    </div>
 
-    <section class="stats">
-      <div class="card">
-        <p>Total Tugas</p>
-        <h2 id="total">0</h2>
+    <div class="menu-label">MENU UTAMA</div>
+    <button class="nav-btn active" data-page="dashboard">
+      <span class="nav-icon">▦</span><span class="nav-text">Dashboard</span>
+    </button>
+    <button class="nav-btn" data-page="planning">
+      <span class="nav-icon">▣</span><span class="nav-text">Daily Planning</span>
+    </button>
+    <button class="nav-btn" data-page="activity">
+      <span class="nav-icon">☷</span><span class="nav-text">Daftar Activity</span>
+    </button>
+
+    <div class="sidebar-bottom">
+      <strong>WORK MANAGEMENT</strong>
+      <p>Kelola rencana dan aktivitas pekerjaan harian Anda dalam satu dashboard.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="page-title" id="headerTitle">Dashboard</div>
+        <div class="page-subtitle" id="headerSubtitle">Pantau progres pekerjaan harian Anda.</div>
+      </div>
+      <div class="top-actions">
+        <div class="date-chip" id="headerDate"></div>
+        <div class="avatar">MY</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="page active" id="dashboard">
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-top"><span>Total Planning</span><span class="stat-icon">▣</span></div>
+          <div class="stat-number" id="statPlanning">0</div>
+          <div class="stat-note">Rencana pekerjaan hari ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top"><span>Total Activity</span><span class="stat-icon">☷</span></div>
+          <div class="stat-number" id="statActivity">0</div>
+          <div class="stat-note">Aktivitas hari ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top"><span>Selesai</span><span class="stat-icon">✓</span></div>
+          <div class="stat-number" id="statDone">0</div>
+          <div class="stat-note">Planning dan activity selesai</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top"><span>Belum Selesai</span><span class="stat-icon">◷</span></div>
+          <div class="stat-number" id="statPending">0</div>
+          <div class="stat-note">Pekerjaan yang perlu ditindaklanjuti</div>
+        </div>
       </div>
 
-      <div class="card">
-        <p>Tugas Selesai</p>
-        <h2 id="completed">0</h2>
+      <div class="progress-layout">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Progress Pekerjaan Hari Ini</div>
+              <div class="panel-desc">Persentase penyelesaian seluruh pekerjaan hari ini</div>
+            </div>
+            <span class="today-tag">HARI INI</span>
+          </div>
+          <div class="progress-number" id="progressText">0%</div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressBar"></div>
+          </div>
+          <div class="progress-legend">
+            <span><i class="dot green-dot"></i><span id="doneLabel">0 selesai</span></span>
+            <span><i class="dot yellow-dot"></i><span id="pendingLabel">0 belum selesai</span></span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Status Pekerjaan</div>
+              <div class="panel-desc">Komposisi pekerjaan hari ini</div>
+            </div>
+          </div>
+          <div class="progress-circle-wrap">
+            <div class="circle" id="progressCircle">
+              <div class="circle-inner" id="circleText">0%</div>
+            </div>
+            <div class="legend-list">
+              <div><i class="dot green-dot"></i>Selesai</div>
+              <div><i class="dot yellow-dot"></i>Belum selesai</div>
+              <div style="margin-top:8px" id="totalLabel">Total: 0 pekerjaan</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <p>Belum Selesai</p>
-        <h2 id="pending">0</h2>
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Daily Planning</div>
+            <div class="panel-desc">Daftar rencana pekerjaan pada hari ini</div>
+          </div>
+          <button class="secondary-btn" onclick="showPage('planning')">Lihat Semua →</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>No.</th><th>Rencana Pekerjaan</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr>
+            </thead>
+            <tbody id="dashboardPlanning"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Daftar Activity</div>
+            <div class="panel-desc">Aktivitas aktual yang dilakukan hari ini</div>
+          </div>
+          <button class="secondary-btn" onclick="showPage('activity')">Lihat Semua →</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>No.</th><th>Nama Aktivitas</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr>
+            </thead>
+            <tbody id="dashboardActivity"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
-    <section class="task-section">
-      <h2>📋 Daftar Aktivitas</h2>
+    <!-- DAILY PLANNING -->
+    <section class="page" id="planning">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Daily Planning</div>
+            <div class="panel-desc">Buat dan kelola rencana pekerjaan berdasarkan tanggal.</div>
+          </div>
+          <button class="primary-btn" onclick="toggleForm('planningForm')">+ Tambah Planning</button>
+        </div>
 
-      <form class="task-form" id="taskForm">
-        <input
-          type="text"
-          id="taskInput"
-          placeholder="Contoh: Belajar HTML dan CSS..."
-          maxlength="120"
-          required
-        >
-        <button type="submit">+ Tambah Tugas</button>
-      </form>
+        <div class="form-panel" id="planningForm">
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nama Rencana Pekerjaan</label>
+              <input id="planningName" placeholder="Contoh: Pemeriksaan gearbox">
+            </div>
+            <div class="form-field">
+              <label>Tanggal Pelaksanaan</label>
+              <input type="date" id="planningDate">
+            </div>
+            <div class="form-field">
+              <label>Kategori</label>
+              <select id="planningCategory">
+                <option>Maintenance</option>
+                <option>Inspection</option>
+                <option>Project</option>
+                <option>Meeting</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button class="primary-btn" onclick="addPlanning()">Simpan</button>
+          </div>
+        </div>
+      </div>
 
-      <ul id="taskList"></ul>
-      <p id="emptyMessage" class="empty">
-        Belum ada tugas. Yuk, tambahkan aktivitas pertamamu!
-      </p>
+      <div class="toolbar">
+        <input class="field" type="date" id="planningFilter" onchange="renderPlanning()">
+        <button class="secondary-btn" onclick="clearPlanningFilter()">Semua Tanggal</button>
+        <button class="secondary-btn" onclick="exportExcel()">↓ Export Excel</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Daftar Planning</div>
+            <div class="panel-desc">Klik status untuk mengubah progres pekerjaan.</div>
+          </div>
+          <span class="today-tag" id="planningCount">0 DATA</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>No.</th><th>Rencana Pekerjaan</th><th>Kategori</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr>
+            </thead>
+            <tbody id="planningTable"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
+
+    <!-- ACTIVITY -->
+    <section class="page" id="activity">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Daftar Activity</div>
+            <div class="panel-desc">Catat aktivitas pekerjaan yang benar-benar dilakukan.</div>
+          </div>
+          <button class="primary-btn" onclick="toggleForm('activityForm')">+ Tambah Activity</button>
+        </div>
+
+        <div class="form-panel" id="activityForm">
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nama Aktivitas</label>
+              <input id="activityName" placeholder="Contoh: Inspeksi equipment">
+            </div>
+            <div class="form-field">
+              <label>Tanggal</label>
+              <input type="date" id="activityDate">
+            </div>
+            <div class="form-field">
+              <label>Waktu</label>
+              <input type="time" id="activityTime">
+            </div>
+            <button class="primary-btn" onclick="addActivity()">Simpan</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input class="field" type="date" id="activityFilter" onchange="renderActivity()">
+        <button class="secondary-btn" onclick="clearActivityFilter()">Semua Tanggal</button>
+        <button class="secondary-btn" onclick="exportExcel()">↓ Export Excel</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">Riwayat Aktivitas</div>
+            <div class="panel-desc">Status aktivitas dapat diperbarui kapan saja.</div>
+          </div>
+          <span class="today-tag" id="activityCount">0 DATA</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>No.</th><th>Nama Aktivitas</th><th>Tanggal</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr>
+            </thead>
+            <tbody id="activityTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
   </main>
+</div>
 
-  <footer>
-    Mini Dashboard &copy; <span id="year"></span>
-    | Dibuat dengan HTML, CSS, dan JavaScript
-  </footer>
+<script>
+const STORAGE_PLANNING = "myDashboardPlanning";
+const STORAGE_ACTIVITY = "myDashboardActivities";
 
-  <script>
-    const taskForm = document.getElementById("taskForm");
-    const taskInput = document.getElementById("taskInput");
-    const taskList = document.getElementById("taskList");
-    const emptyMessage = document.getElementById("emptyMessage");
+const today = () => {
+  const d = new Date();
+  const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0,10);
+};
 
-    let tasks = [];
+let planning = JSON.parse(localStorage.getItem(STORAGE_PLANNING) || "[]");
+let activities = JSON.parse(localStorage.getItem(STORAGE_ACTIVITY) || "[]");
 
-    function updateClock() {
-      const now = new Date();
+function saveData() {
+  localStorage.setItem(STORAGE_PLANNING, JSON.stringify(planning));
+  localStorage.setItem(STORAGE_ACTIVITY, JSON.stringify(activities));
+}
 
-      document.getElementById("clock").textContent =
-        now.toLocaleDateString("id-ID", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric"
-        }) + " | " +
-        now.toLocaleTimeString("id-ID");
-    }
+function formatDate(date) {
+  if (!date) return "-";
+  return new Date(date + "T00:00:00").toLocaleDateString("id-ID", {
+    day:"2-digit", month:"short", year:"numeric"
+  });
+}
 
-    function updateStats() {
-      const completed = tasks.filter(task => task.done).length;
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
+  document.getElementById(page).classList.add("active");
 
-      document.getElementById("total").textContent = tasks.length;
-      document.getElementById("completed").textContent = completed;
-      document.getElementById("pending").textContent =
-        tasks.length - completed;
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === page);
+  });
 
-      emptyMessage.style.display =
-        tasks.length === 0 ? "block" : "none";
-    }
+  const titles = {
+    dashboard: ["Dashboard", "Pantau progres pekerjaan harian Anda."],
+    planning: ["Daily Planning", "Atur rencana pekerjaan berdasarkan tanggal."],
+    activity: ["Daftar Activity", "Catat dan pantau aktivitas pekerjaan Anda."]
+  };
 
-    function renderTasks() {
-      taskList.replaceChildren();
+  document.getElementById("headerTitle").textContent = titles[page][0];
+  document.getElementById("headerSubtitle").textContent = titles[page][1];
 
-      tasks.forEach(task => {
-        const li = document.createElement("li");
+  if (page === "dashboard") renderDashboard();
+  if (page === "planning") renderPlanning();
+  if (page === "activity") renderActivity();
+}
 
-        if (task.done) {
-          li.classList.add("done");
-        }
+document.querySelectorAll(".nav-btn").forEach(btn => {
+  btn.addEventListener("click", () => showPage(btn.dataset.page));
+});
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.className = "check";
-        checkbox.checked = task.done;
-        checkbox.setAttribute("aria-label", "Tandai tugas selesai");
+function toggleForm(id) {
+  document.getElementById(id).classList.toggle("open");
+}
 
-        checkbox.addEventListener("change", () => {
-          task.done = checkbox.checked;
-          renderTasks();
-        });
+function addPlanning() {
+  const name = document.getElementById("planningName").value.trim();
+  const date = document.getElementById("planningDate").value;
+  const category = document.getElementById("planningCategory").value;
 
-        const span = document.createElement("span");
-        span.textContent = task.text;
+  if (!name || !date) {
+    alert("Isi nama pekerjaan dan tanggal terlebih dahulu.");
+    return;
+  }
 
-        const deleteButton = document.createElement("button");
-        deleteButton.type = "button";
-        deleteButton.className = "delete";
-        deleteButton.textContent = "Hapus";
+  planning.push({
+    id: Date.now().toString(),
+    name, date, category,
+    done: false,
+    createdAt: new Date().toISOString()
+  });
 
-        deleteButton.addEventListener("click", () => {
-          tasks = tasks.filter(item => item.id !== task.id);
-          renderTasks();
-        });
+  saveData();
+  document.getElementById("planningName").value = "";
+  document.getElementById("planningForm").classList.remove("open");
+  renderAll();
+}
 
-        li.append(checkbox, span, deleteButton);
-        taskList.appendChild(li);
-      });
+function addActivity() {
+  const name = document.getElementById("activityName").value.trim();
+  const date = document.getElementById("activityDate").value;
+  const time = document.getElementById("activityTime").value;
 
-      updateStats();
-    }
+  if (!name || !date || !time) {
+    alert("Isi nama aktivitas, tanggal, dan waktu.");
+    return;
+  }
 
-    taskForm.addEventListener("submit", event => {
-      event.preventDefault();
+  activities.push({
+    id: Date.now().toString(),
+    name, date, time,
+    done: false,
+    createdAt: new Date().toISOString()
+  });
 
-      const text = taskInput.value.trim();
+  saveData();
+  document.getElementById("activityName").value = "";
+  document.getElementById("activityForm").classList.remove("open");
+  renderAll();
+}
 
-      if (!text) return;
+function statusButton(type, id, done) {
+  return `<button class="status status-btn ${done ? "done" : "pending"}"
+    onclick="toggleStatus('${type}','${id}')">
+    ${done ? "✓ Selesai" : "◷ Belum Selesai"}
+  </button>`;
+}
 
-      tasks.push({
-        id: Date.now() + Math.random(),
-        text: text,
-        done: false
-      });
+function toggleStatus(type, id) {
+  const list = type === "planning" ? planning : activities;
+  const item = list.find(x => x.id === id);
+  if (!item) return;
+  item.done = !item.done;
+  saveData();
+  renderAll();
+}
 
-      taskInput.value = "";
-      renderTasks();
-      taskInput.focus();
-    });
+function deleteItem(type, id) {
+  if (!confirm("Yakin ingin menghapus data ini?")) return;
+  if (type === "planning") planning = planning.filter(x => x.id !== id);
+  else activities = activities.filter(x => x.id !== id);
+  saveData();
+  renderAll();
+}
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+function renderDashboard() {
+  const t = today();
+  const p = planning.filter(x => x.date === t);
+  const a = activities.filter(x => x.date === t);
 
-    updateClock();
-    setInterval(updateClock, 1000);
-    renderTasks();
-  </script>
+  const all = [...p, ...a];
+  const done = all.filter(x => x.done).length;
+  const pending = all.length - done;
+  const percent = all.length ? Math.round(done / all.length * 100) : 0;
+
+  document.getElementById("statPlanning").textContent = p.length;
+  document.getElementById("statActivity").textContent = a.length;
+  document.getElementById("statDone").textContent = done;
+  document.getElementById("statPending").textContent = pending;
+
+  document.getElementById("progressText").textContent = percent + "%";
+  document.getElementById("progressBar").style.width = percent + "%";
+  document.getElementById("doneLabel").textContent = done + " selesai";
+  document.getElementById("pendingLabel").textContent = pending + " belum selesai";
+  document.getElementById("circleText").textContent = percent + "%";
+  document.getElementById("totalLabel").textContent = "Total: " + all.length + " pekerjaan";
+
+  document.getElementById("progressCircle").style.background =
+    `conic-gradient(#09a766 ${percent * 3.6}deg, #edf1ee 0deg)`;
+
+  const pBody = document.getElementById("dashboardPlanning");
+  const aBody = document.getElementById("dashboardActivity");
+
+  pBody.innerHTML = p.length ? p.map((x,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${escapeHTML(x.name)}</strong></td>
+      <td>${formatDate(x.date)}</td>
+      <td>${statusButton("planning",x.id,x.done)}</td>
+      <td><button class="table-action" onclick="deleteItem('planning','${x.id}')">×</button></td>
+    </tr>`).join("") : emptyRow(5, "Belum ada planning untuk hari ini.");
+
+  aBody.innerHTML = a.length ? a.slice().sort((x,y) => x.time.localeCompare(y.time)).map((x,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${escapeHTML(x.name)}</strong></td>
+      <td>${x.time}</td>
+      <td>${statusButton("activity",x.id,x.done)}</td>
+      <td><button class="table-action" onclick="deleteItem('activity','${x.id}')">×</button></td>
+    </tr>`).join("") : emptyRow(5, "Belum ada aktivitas untuk hari ini.");
+}
+
+function renderPlanning() {
+  const filter = document.getElementById("planningFilter").value;
+  const data = planning
+    .filter(x => !filter || x.date === filter)
+    .sort((a,b) => b.date.localeCompare(a.date));
+
+  document.getElementById("planningCount").textContent = data.length + " DATA";
+  document.getElementById("planningTable").innerHTML = data.length ? data.map((x,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${escapeHTML(x.name)}</strong></td>
+      <td>${escapeHTML(x.category || "-")}</td>
+      <td>${formatDate(x.date)}</td>
+      <td>${statusButton("planning",x.id,x.done)}</td>
+      <td><button class="table-action" onclick="deleteItem('planning','${x.id}')">×</button></td>
+    </tr>`).join("") : emptyRow(6, "Belum ada data planning.");
+}
+
+function renderActivity() {
+  const filter = document.getElementById("activityFilter").value;
+  const data = activities
+    .filter(x => !filter || x.date === filter)
+    .sort((a,b) => b.date.localeCompare(a.date) || a.time.localeCompare(b.time));
+
+  document.getElementById("activityCount").textContent = data.length + " DATA";
+  document.getElementById("activityTable").innerHTML = data.length ? data.map((x,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${escapeHTML(x.name)}</strong></td>
+      <td>${formatDate(x.date)}</td>
+      <td>${x.time}</td>
+      <td>${statusButton("activity",x.id,x.done)}</td>
+      <td><button class="table-action" onclick="deleteItem('activity','${x.id}')">×</button></td>
+    </tr>`).join("") : emptyRow(6, "Belum ada data aktivitas.");
+}
+
+function emptyRow(cols, message) {
+  return `<tr><td colspan="${cols}" class="empty">${message}</td></tr>`;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+  })[char]);
+}
+
+function clearPlanningFilter() {
+  document.getElementById("planningFilter").value = "";
+  renderPlanning();
+}
+function clearActivityFilter() {
+  document.getElementById("activityFilter").value = "";
+  renderActivity();
+}
+
+function renderAll() {
+  renderDashboard();
+  renderPlanning();
+  renderActivity();
+}
+
+function exportExcel() {
+  if (typeof XLSX === "undefined") {
+    alert("Library Excel belum berhasil dimuat. Periksa koneksi internet lalu refresh halaman.");
+    return;
+  }
+
+  const planningData = planning.map(x => ({
+    "Rencana Pekerjaan": x.name,
+    "Kategori": x.category,
+    "Tanggal": x.date,
+    "Status": x.done ? "Selesai" : "Belum Selesai"
+  }));
+
+  const activityData = activities.map(x => ({
+    "Nama Aktivitas": x.name,
+    "Tanggal": x.date,
+    "Waktu": x.time,
+    "Status": x.done ? "Selesai" : "Belum Selesai"
+  }));
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(planningData), "Daily Planning");
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(activityData), "Daftar Activity");
+  XLSX.writeFile(wb, "MyDashboard_Report.xlsx");
+}
+
+document.getElementById("headerDate").textContent =
+  new Date().toLocaleDateString("id-ID", {
+    weekday:"long", day:"numeric", month:"long", year:"numeric"
+  });
+
+document.getElementById("planningDate").value = today();
+document.getElementById("activityDate").value = today();
+document.getElementById("planningFilter").value = today();
+document.getElementById("activityFilter").value = today();
+document.getElementById("activityTime").value =
+  new Date().toTimeString().slice(0,5);
+
+renderAll();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </body>
 </html>
